@@ -26,4 +26,9 @@ _.memoize = function(fn1, fn2) {
     };
 }
 
+_.bind = function(fn, target) {
+    return function () {
+        return fn.apply(target);
+    }
+};
 module.exports = _;
