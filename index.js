@@ -15,5 +15,15 @@ _.once = function(fn) {
     }
 }
 
+_.memoize = function(fn1, fn2) {
+    var cache = {};
+    return function(arg) {
+        var key = fn2 ? fn2(arg) : arg;
+        if(!(key in cache)) {
+            cache[key] = fn1(arg);
+        }
+        return cache[key];
+    };
+}
 
 module.exports = _;
