@@ -17,14 +17,15 @@ _.once = function(fn) {
 
 _.memoize = function(fn1, fn2) {
     var cache = {};
-    return function(arg) {
-        var key = fn2 ? fn2(arg) : arg;
+    return function() {
+        var key = fn2 ? fn2.apply(fn2, arguments) : arguments[0];
         if(!(key in cache)) {
-            cache[key] = fn1(arg);
+            cache[key] = fn1.apply(fn1, arguments);
         }
         return cache[key];
     };
 }
+
 
 _.bind = function(fn, target) {
     return function () {
